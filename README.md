@@ -3,8 +3,6 @@ A live SOC environment built in Azure using Microsoft Sentinel to detect and ana
 
 In this lab I deployed a live honeynet in Microsoft Azure by configuring a deliberately vulnerable Windows virtual machine exposed to the public internet. The environment was integrated with Microsoft Sentinel via a Log Analytics workspace and Data Collection Rule to ingest and analyse real-world security events. I configured a brute force detection analytics rule mapped to the MITRE ATT&CK framework, built a geolocation watchlist for IP enrichment, and connected the environment to Microsoft Defender XDR. The objective was to simulate a real SOC environment, detect live attack activity through KQL queries and custom analytics rules, and develop hands-on experience with cloud-native SIEM tooling relevant to a Security Operations Analyst role
 
-# Azure SOC Honeynet Lab
-
 ## Objective
 *paste your objective paragraph here*
 
@@ -86,11 +84,6 @@ In this lab I deployed a live honeynet in Microsoft Azure by configuring a delib
 
 ![Watchlist - Part 3](screenshots/Picture18.png)
 
-## Workbook creation for visual mapping
-![Workbook - Part 1](screenshots/Picture19.png)
-
-![Watchlist - Part 2](screenshots/Picture20.png)
-
 ## Detection Engineering
 
 ### Brute Force Analytics Rule
@@ -98,18 +91,23 @@ In this lab I deployed a live honeynet in Microsoft Azure by configuring a delib
 
 *The completed analytics rule runs every hour, looks back across the last hour of data, groups alerts into a single incident to reduce noise, and maps entity types to both the attacker IP address and the targeted account — mirroring how production SOC detection rules are structured.*
 
+## Workbook creation for visual mapping
+![Workbook - Part 1](screenshots/Picture19.png)
+
+![Watchlist - Part 2](screenshots/Picture20.png)
+
 ### MITRE ATT&CK Mapping — T1110 Brute Force
 ![MITRE Mapping](screenshots/Picture22.png)
 
 ### Rule Summary
 ![Rule Summary](screenshots/Picture23.png)
-*caption here*
+
+*The Review and Create summary confirms the rule name, MITRE ATT&CK Credential Access mapping, High severity, hourly run frequency, entity mapping for both IP address and account, and alert grouping — all validated before saving*
 
 ## Findings and Analysis
-*This section will be updated once attack data begins 
-flowing into the workspace. The VM remains exposed 
-with the DANGER-AllowAll rule active and logs are 
-expected to populate within 24 hours.*
+
+*This section will be updated once attack data begins flowing into the workspace. The VM remains exposed with the DANGER-AllowAll rule active and logs are expected to populate within 24 hours.*
 
 ## Lessons Learned
-*coming soon*
+
+*This lab reinforced that internet-exposed infrastructure attracts automated attack traffic extremely rapidly, highlighting the importance of restrictive NSG policies in production environments. Building the detection rule from scratch gave me practical insight into how SOC teams tune analytics rules to balance detection sensitivity against alert fatigue. Working through real configuration challenges such as the corporate laptop RDP restriction developed my troubleshooting approach and introduced me to Azure Bastion as a secure administrative access solution*
