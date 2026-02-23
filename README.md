@@ -31,65 +31,78 @@ In this lab I deployed a live honeynet in Microsoft Azure by configuring a delib
 ![VM configuration](screenshots/Picture2.png)
 
 ### NSG Configuration  
-![NSG Rule](screenshots/Picture2.png)
+![NSG Rule](screenshots/Picture3.png)
 
 ## Security Configuration
 
 ### DANGER-AllowAll Inbound Rule
-![Allow All Rule](screenshots/Picture3.png)
 
 *The default RDP inbound rule was removed and replaced with a single permissive rule allowing all inbound traffic. This was a deliberate architectural decision to maximise the VM's exposure to the internet and generate real-world attack telemetry for analysis in Sentinel.*
 
-### VM Deployment Confirmed
-![Deployment Complete](screenshots/Picture4.png)
+![Allow All Rule](screenshots/Picture4.png)
 
-*caption here*
+![Configuration of Rule](screenshots/Picture5.png)
+
+![Final](screenshots/Picture6.png)
+
+### VM Deployment Confirmed
+![Deployment Complete](screenshots/Picture7.png)
+
+*All five resources deployed successfully — the virtual machine, network interface, public IP address, associated deployment, and the NSG — confirming the environment was fully provisioned and ready for configuration.*
 
 ## Troubleshooting — RDP vs Azure Bastion
-![RDP Failure](screenshots/Picture5.png)
+![RDP Failure - Part 1](screenshots/Picture8.png)
 
-*During this lab all tasks were completed using a 
-corporate laptop so there were certain limitations 
-when it came to administrative tasks hence the RDP 
-connection failing. Azure Bastion was used as an 
-alternative secure connection method via the browser.*
+![RDP Failure - Part 2](screenshots/Picture9.png)
 
-![Bastion Success](screenshots/Picture6.png)
+*During this lab all tasks were completed using a corporate laptop so there were certain limitations when it came to administrative tasks hence the RDP connection failing. Azure Bastion was used as an alternative secure connection method via the browser.*
+
+![Bastion Success - Part 1](screenshots/Picture10.png)
+
+![Bastion Success - Part 2](screenshots/Picture11.png)
 
 ### Disabling Windows Firewall
-![Firewall Disabled](screenshots/Picture7.png)
-*caption here*
+![Firewall Disabled](screenshots/Picture12.png)
+
+*Windows Defender Firewall was disabled for both private and public network profiles inside the VM. This ensures inbound traffic is not blocked at the OS level, allowing attack attempts to reach the machine and generate loggable authentication events.*
 
 ## SIEM Integration
 
 ### Log Analytics Workspace
-![LAW Creation](screenshots/Picture8.png)
-*caption here*
+![LAW Creation](screenshots/Picture13.png)
 
 ### Connecting VM to Sentinel via AMA
-![Content Hub](screenshots/Picture9.png)
-*caption here*
+![Content Hub](screenshots/Picture14.png)
+
+*The data connector status confirmed as connected and actively receiving events, with the ingestion graph showing log volume increasing over time. This validated that the DCR was successfully shipping Windows Security Events from the VM to the Log Analytics workspace.*
 
 ### Data Collection Rule
-![DCR](screenshots/Picture10.png)
-*caption here*
+![DCR](screenshots/Picture15.png)
 
 ### GeoIP Watchlist
-![Watchlist](screenshots/Picture11.png)
-*caption here*
+![Watchlist - Part 1](screenshots/Picture16.png)
+
+![Watchlist - Part 2](screenshots/Picture17.png)
+
+![Watchlist - Part 3](screenshots/Picture18.png)
+
+## Workbook creation for visual mapping
+![Workbook - Part 1](screenshots/Picture19.png)
+
+![Watchlist - Part 2](screenshots/Picture20.png)
 
 ## Detection Engineering
 
 ### Brute Force Analytics Rule
-![Analytics Rule](screenshots/Picture12.png)
-*caption here*
+![Analytics Rule](screenshots/Picture21.png)
+
+*The completed analytics rule runs every hour, looks back across the last hour of data, groups alerts into a single incident to reduce noise, and maps entity types to both the attacker IP address and the targeted account — mirroring how production SOC detection rules are structured.*
 
 ### MITRE ATT&CK Mapping — T1110 Brute Force
-![MITRE Mapping](screenshots/Picture13.png)
-*caption here*
+![MITRE Mapping](screenshots/Picture22.png)
 
 ### Rule Summary
-![Rule Summary](screenshots/Picture14.png)
+![Rule Summary](screenshots/Picture23.png)
 *caption here*
 
 ## Findings and Analysis
