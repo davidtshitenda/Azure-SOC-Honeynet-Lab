@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 680" width="1000" height="680" font-family="Arial, sans-serif">
+  <!-- Background -->
+  <rect width="1000" height="680" fill="#0d1117" rx="12"/>
+
+  <!-- Title -->
+  <text x="500" y="38" text-anchor="middle" font-size="20" font-weight="bold" fill="#58a6ff">Azure SOC Honeynet Lab — Architecture</text>
+  <line x1="80" y1="50" x2="920" y2="50" stroke="#30363d" stroke-width="1"/>
+
+  <!-- INTERNET ZONE -->
+  <rect x="30" y="70" width="180" height="220" rx="10" fill="#161b22" stroke="#f85149" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="120" y="92" text-anchor="middle" font-size="11" font-weight="bold" fill="#f85149">🌍  INTERNET</text>
+  <text x="120" y="108" text-anchor="middle" font-size="9" fill="#8b949e">Global Threat Actors</text>
+
+  <!-- Attacker icons -->
+  <rect x="50" y="118" width="130" height="38" rx="6" fill="#21262d" stroke="#f85149" stroke-width="1"/>
+  <text x="115" y="133" text-anchor="middle" font-size="10" fill="#f85149">💀 Brute Force Bots</text>
+  <text x="115" y="148" text-anchor="middle" font-size="9" fill="#8b949e">RDP Port 3389</text>
+
+  <rect x="50" y="164" width="130" height="38" rx="6" fill="#21262d" stroke="#f85149" stroke-width="1"/>
+  <text x="115" y="179" text-anchor="middle" font-size="10" fill="#f85149">🔍 Port Scanners</text>
+  <text x="115" y="194" text-anchor="middle" font-size="9" fill="#8b949e">Shodan / Masscan</text>
+
+  <rect x="50" y="210" width="130" height="38" rx="6" fill="#21262d" stroke="#f85149" stroke-width="1"/>
+  <text x="115" y="225" text-anchor="middle" font-size="10" fill="#f85149">📱 Simulated Attacks</text>
+  <text x="115" y="240" text-anchor="middle" font-size="9" fill="#8b949e">Mobile / RDP Client</text>
+
+  <!-- Arrow: Internet to NSG -->
+  <line x1="210" y1="180" x2="265" y2="180" stroke="#f85149" stroke-width="2" marker-end="url(#arrowRed)"/>
+  <text x="237" y="172" text-anchor="middle" font-size="8" fill="#f85149">ALL</text>
+  <text x="237" y="183" text-anchor="middle" font-size="8" fill="#f85149">TRAFFIC</text>
+
+  <!-- AZURE RESOURCE GROUP BOX -->
+  <rect x="265" y="60" width="700" height="590" rx="10" fill="#161b22" stroke="#1f6feb" stroke-width="1.5" stroke-dasharray="8,3"/>
+  <text x="390" y="82" text-anchor="middle" font-size="11" font-weight="bold" fill="#1f6feb">☁  Azure — Resource Group: SOC-Honeynet-Lab</text>
+
+  <!-- VNET BOX -->
+  <rect x="280" y="92" width="420" height="300" rx="8" fill="#0d1117" stroke="#388bfd" stroke-width="1" stroke-dasharray="5,3"/>
+  <text x="345" y="112" text-anchor="middle" font-size="10" font-weight="bold" fill="#388bfd">Virtual Network: vnet-southafricanorth-1</text>
+
+  <!-- NSG -->
+  <rect x="295" y="120" width="155" height="80" rx="8" fill="#21262d" stroke="#f85149" stroke-width="1.5"/>
+  <text x="372" y="142" text-anchor="middle" font-size="11" font-weight="bold" fill="#f85149">🛡 NSG</text>
+  <text x="372" y="158" text-anchor="middle" font-size="9" fill="#8b949e">Network Security Group</text>
+  <text x="372" y="173" text-anchor="middle" font-size="9" fill="#f85149">⚠ DANGER-AllowAll</text>
+  <text x="372" y="187" text-anchor="middle" font-size="9" fill="#8b949e">Inbound: Any → Any</text>
+
+  <!-- Arrow NSG to VM -->
+  <line x1="450" y1="160" x2="505" y2="160" stroke="#f85149" stroke-width="1.5" marker-end="url(#arrowRed)"/>
+
+  <!-- Windows VM -->
+  <rect x="505" y="120" width="175" height="120" rx="8" fill="#21262d" stroke="#3fb950" stroke-width="1.5"/>
+  <text x="592" y="145" text-anchor="middle" font-size="20">🖥</text>
+  <text x="592" y="165" text-anchor="middle" font-size="11" font-weight="bold" fill="#3fb950">Windows VM</text>
+  <text x="592" y="180" text-anchor="middle" font-size="9" fill="#8b949e">windows-vm-honeypot</text>
+  <text x="592" y="195" text-anchor="middle" font-size="9" fill="#8b949e">Windows Server 2019</text>
+  <text x="592" y="210" text-anchor="middle" font-size="9" fill="#f85149">🔓 Firewall: OFF</text>
+  <text x="592" y="225" text-anchor="middle" font-size="9" fill="#8b949e">RDP Exposed: :3389</text>
+
+  <!-- Bastion -->
+  <rect x="295" y="230" width="155" height="70" rx="8" fill="#21262d" stroke="#58a6ff" stroke-width="1.5"/>
+  <text x="372" y="252" text-anchor="middle" font-size="18">🔐</text>
+  <text x="372" y="270" text-anchor="middle" font-size="11" font-weight="bold" fill="#58a6ff">Azure Bastion</text>
+  <text x="372" y="285" text-anchor="middle" font-size="9" fill="#8b949e">Secure browser access</text>
+
+  <!-- Bastion to VM -->
+  <line x1="450" y1="265" x2="505" y2="200" stroke="#58a6ff" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrowBlue)"/>
+
+  <!-- AMA Agent note on VM -->
+  <rect x="505" y="260" width="175" height="50" rx="6" fill="#161b22" stroke="#d29922" stroke-width="1"/>
+  <text x="592" y="280" text-anchor="middle" font-size="10" font-weight="bold" fill="#d29922">📡 AMA Agent</text>
+  <text x="592" y="295" text-anchor="middle" font-size="9" fill="#8b949e">Data Collection Rule</text>
+  <text x="592" y="308" text-anchor="middle" font-size="9" fill="#8b949e">DCR-Windows-SecurityEvents</text>
+
+  <!-- Arrow VM logs to Log Analytics -->
+  <line x1="592" y1="310" x2="592" y2="375" stroke="#d29922" stroke-width="1.5" marker-end="url(#arrowYellow)"/>
+  <text x="610" y="348" font-size="8" fill="#d29922">Event Logs</text>
+  <text x="610" y="360" font-size="8" fill="#d29922">EventID 4625</text>
+
+  <!-- LOG ANALYTICS WORKSPACE -->
+  <rect x="460" y="375" width="260" height="80" rx="8" fill="#21262d" stroke="#d29922" stroke-width="1.5"/>
+  <text x="590" y="400" text-anchor="middle" font-size="18">📊</text>
+  <text x="590" y="418" text-anchor="middle" font-size="11" font-weight="bold" fill="#d29922">Log Analytics Workspace</text>
+  <text x="590" y="433" text-anchor="middle" font-size="9" fill="#8b949e">SOC-Lab-Workspace</text>
+  <text x="590" y="448" text-anchor="middle" font-size="9" fill="#8b949e">SecurityEvent Table | KQL Queries</text>
+
+  <!-- Arrow Log Analytics to Sentinel -->
+  <line x1="590" y1="455" x2="590" y2="510" stroke="#58a6ff" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+
+  <!-- MICROSOFT SENTINEL -->
+  <rect x="430" y="510" width="320" height="120" rx="8" fill="#21262d" stroke="#58a6ff" stroke-width="2"/>
+  <text x="590" y="535" text-anchor="middle" font-size="18">🛡</text>
+  <text x="590" y="555" text-anchor="middle" font-size="13" font-weight="bold" fill="#58a6ff">Microsoft Sentinel</text>
+  <text x="590" y="572" text-anchor="middle" font-size="9" fill="#8b949e">SIEM / SOAR Platform</text>
+
+  <!-- Sentinel features -->
+  <rect x="440" y="580" width="88" height="38" rx="5" fill="#161b22" stroke="#388bfd" stroke-width="1"/>
+  <text x="484" y="596" text-anchor="middle" font-size="8" fill="#388bfd">📋 Analytics</text>
+  <text x="484" y="609" text-anchor="middle" font-size="8" fill="#8b949e">Brute Force Rule</text>
+
+  <rect x="536" y="580" width="88" height="38" rx="5" fill="#161b22" stroke="#388bfd" stroke-width="1"/>
+  <text x="580" y="596" text-anchor="middle" font-size="8" fill="#388bfd">🗺 Workbooks</text>
+  <text x="580" y="609" text-anchor="middle" font-size="8" fill="#8b949e">Attack Map</text>
+
+  <rect x="632" y="580" width="108" height="38" rx="5" fill="#161b22" stroke="#388bfd" stroke-width="1"/>
+  <text x="686" y="596" text-anchor="middle" font-size="8" fill="#388bfd">🚨 Incidents</text>
+  <text x="686" y="609" text-anchor="middle" font-size="8" fill="#8b949e">Triage &amp; Investigate</text>
+
+  <!-- DEFENDER XDR -->
+  <rect x="730" y="375" width="215" height="80" rx="8" fill="#21262d" stroke="#bc8cff" stroke-width="1.5"/>
+  <text x="837" y="400" text-anchor="middle" font-size="18">🔷</text>
+  <text x="837" y="418" text-anchor="middle" font-size="11" font-weight="bold" fill="#bc8cff">Microsoft Defender XDR</text>
+  <text x="837" y="433" text-anchor="middle" font-size="9" fill="#8b949e">Integrated Alert Streaming</text>
+  <text x="837" y="448" text-anchor="middle" font-size="9" fill="#8b949e">Advanced Hunting</text>
+
+  <!-- Arrow Defender to Sentinel -->
+  <line x1="730" y1="415" x2="750" y2="415" stroke="#bc8cff" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="750" y1="415" x2="750" y2="560" stroke="#bc8cff" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrowPurple)"/>
+
+  <!-- WATCHLIST -->
+  <rect x="730" y="480" width="215" height="70" rx="8" fill="#21262d" stroke="#3fb950" stroke-width="1.5"/>
+  <text x="837" y="502" text-anchor="middle" font-size="18">📍</text>
+  <text x="837" y="520" text-anchor="middle" font-size="11" font-weight="bold" fill="#3fb950">GeoIP Watchlist</text>
+  <text x="837" y="535" text-anchor="middle" font-size="9" fill="#8b949e">IP → Country Enrichment</text>
+  <text x="837" y="548" text-anchor="middle" font-size="9" fill="#8b949e">MaxMind GeoLite2</text>
+
+  <!-- Watchlist to Sentinel -->
+  <line x1="730" y1="515" x2="755" y2="515" stroke="#3fb950" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="755" y1="515" x2="755" y2="570" stroke="#3fb950" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrowGreen)"/>
+
+  <!-- MITRE ATT&CK label -->
+  <rect x="280" y="375" width="165" height="70" rx="8" fill="#21262d" stroke="#f0883e" stroke-width="1.5"/>
+  <text x="362" y="397" text-anchor="middle" font-size="16">⚔</text>
+  <text x="362" y="415" text-anchor="middle" font-size="11" font-weight="bold" fill="#f0883e">MITRE ATT&amp;CK</text>
+  <text x="362" y="430" text-anchor="middle" font-size="9" fill="#8b949e">T1110 — Brute Force</text>
+  <text x="362" y="445" text-anchor="middle" font-size="9" fill="#8b949e">Credential Access Tactic</text>
+
+  <!-- MITRE to Sentinel -->
+  <line x1="362" y1="445" x2="362" y2="560" stroke="#f0883e" stroke-width="1" stroke-dasharray="4,2"/>
+  <line x1="362" y1="560" x2="430" y2="560" stroke="#f0883e" stroke-width="1" stroke-dasharray="4,2" marker-end="url(#arrowOrange)"/>
+
+  <!-- LEGEND -->
+  <rect x="30" y="480" width="215" height="165" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+  <text x="137" y="500" text-anchor="middle" font-size="11" font-weight="bold" fill="#8b949e">LEGEND</text>
+  <line x1="45" y1="510" x2="75" y2="510" stroke="#f85149" stroke-width="2"/>
+  <text x="85" y="514" font-size="9" fill="#c9d1d9">Attack traffic / Threat</text>
+  <line x1="45" y1="528" x2="75" y2="528" stroke="#58a6ff" stroke-width="2"/>
+  <text x="85" y="532" font-size="9" fill="#c9d1d9">Log / Data flow</text>
+  <line x1="45" y1="546" x2="75" y2="546" stroke="#d29922" stroke-width="2"/>
+  <text x="85" y="550" font-size="9" fill="#c9d1d9">Event collection</text>
+  <line x1="45" y1="564" x2="75" y2="564" stroke="#bc8cff" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="85" y="568" font-size="9" fill="#c9d1d9">XDR integration</text>
+  <line x1="45" y1="582" x2="75" y2="582" stroke="#3fb950" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="85" y="586" font-size="9" fill="#c9d1d9">GeoIP enrichment</text>
+  <line x1="45" y1="600" x2="75" y2="600" stroke="#f0883e" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="85" y="604" font-size="9" fill="#c9d1d9">MITRE mapping</text>
+  <line x1="45" y1="618" x2="75" y2="618" stroke="#58a6ff" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="85" y="622" font-size="9" fill="#c9d1d9">Secure admin access</text>
+  <text x="137" y="640" text-anchor="middle" font-size="8" fill="#30363d">David T. Wa Tshitenda — SOC Honeynet Lab 2026</text>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowRed" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#f85149"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#58a6ff"/>
+    </marker>
+    <marker id="arrowYellow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#d29922"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#bc8cff"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#3fb950"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#f0883e"/>
+    </marker>
+  </defs>
+</svg>
