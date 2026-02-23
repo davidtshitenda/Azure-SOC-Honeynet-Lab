@@ -5,5 +5,5 @@ In this lab I deployed a live honeynet in Microsoft Azure by configuring a delib
 
 
 ### VM Creation
-![VM Creation](screenshots/picture1.png)
+![VM Creation](screenshots/Picture1.png)
 *The Standard_D2ls_v5 size was selected after the B1s was unavailable in South Africa North for free tier subscriptions.*
