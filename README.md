@@ -95,6 +95,8 @@ In this lab I deployed a live honeynet in Microsoft Azure by configuring a delib
 
 ![Watchlist - Part 2](screenshots/Picture20.png)
 
+![Watchlist - Part 2](screenshots/Picture32.png)
+
 ### MITRE ATT&CK Mapping — T1110 Brute Force
 ![MITRE Mapping](screenshots/Picture22.png)
 
@@ -105,7 +107,15 @@ In this lab I deployed a live honeynet in Microsoft Azure by configuring a delib
 
 ## Findings and Analysis
 
-*This section will be updated once attack data begins flowing into the workspace. The VM remains exposed with the DANGER-AllowAll rule active and logs are expected to populate within 24 hours.*
+*Within 24 hours of deployment the VM was discovered by automated threat actors with no additional exposure beyond the permissive NSG rule. A total of 15 failed authentication attempts were recorded across 4 unique source IP addresses. The most notable finding was IP 167.220.196.182 specifically targeting the actual administrator account username rather than generic defaults, suggesting either prior reconnaissance or credential list usage. IP 5.191.246.197 attempted both Administrator and admin variants consistent with automated password spraying tools. All attempts were detected by the brute force analytics rule and surfaced as incidents in Microsoft Sentinel.*
+
+![Findings - Part 1](screenshots/Picture33.png)
+
+![Rule Summary](screenshots/Picture34.png)
+
+![Rule Summary](screenshots/Picture35.png)
+
+![Rule Summary](screenshots/Picture36.png)
 
 ## Lessons Learned
 
